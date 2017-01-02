@@ -1,20 +1,22 @@
-'''
-Created on Dec 14, 2016
-
-@author: fabio-teixeira
-'''
 import json
 import datetime
 from pprint import pprint
 
 
+
+# Open file provided by Totvs.
 def openFile(file):
     with open(file) as data_file:
         data = json.load(data_file)
     return data
 
+
+
+#Read the json and create a tabular file.
 def patternSetFields(totvsFile = 'sample.txt', tabularFile = "customerWillSpendTabular.txt"):
+    #Create a file
     fo = open(tabularFile, "wb")
+    #Create the fields header 
     fo.write(bytes('valorTotal' + ";" +
                    'ide_dhEmi_$date' + ";" +
                    'ide_natOp' +';'+
@@ -43,6 +45,7 @@ def patternSetFields(totvsFile = 'sample.txt', tabularFile = "customerWillSpendT
                    'prod_vUnCom' +';'+
                    'prod_xProd' + '\n' , 'UTF-8'))
     
+    #Parse and write all invoice fields
     data = openFile(totvsFile)
     for x in data:
         for y in x['dets']:
@@ -76,17 +79,20 @@ def patternSetFields(totvsFile = 'sample.txt', tabularFile = "customerWillSpendT
                            str(y['prod']['xProd'] + '\n') , 'UTF-8'))
                                        
     fo.close()
-    
+
+
+#Read the json and create a tabular file. This function identify the week of the invoice.     
 def salesForecastNextWeek(totvsFile = 'sample.txt', tabularFile = "saleForecastTabular.txt"):
+    #Create a file
     fo = open(tabularFile, "wb")
+    #Create the fields header
     fo.write(bytes('valorTotal' + ";" +
                    'ide_dhEmi_date' + ";" +
                    'weekNumber' +  
                    '\n' , 'UTF-8'))
-    
+    #Parse and write all invoice fields
     data = openFile(totvsFile)
-    for x in data:
-        #"2016-01-23T14:56:35.000Z"                
+    for x in data:                    
         fo.write(bytes(str(x['complemento']['valorTotal']) + ";" +
                        str(x['ide']['dhEmi']['$date']) + ";" + 
                        str(datetime.datetime.strptime(str(x['ide']['dhEmi']['$date']), "%Y-%m-%dT%H:%M:%S.%fZ").date().isocalendar()[1]) + 
