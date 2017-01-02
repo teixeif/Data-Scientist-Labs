@@ -7,6 +7,7 @@ The R Project for Statistical Computing: <a href='https://www.r-project.org/'>In
 RStudio: <a href='https://www.rstudio.com/'>Instructions to install</a><br/>
 
 
+<strong>Steps:</strong><br/>
 1. Detach this Github repository in desired directory.
 2. In a command prompt, move to a desired directory and type: <strong>python3.4 readFile.py</strong>
 3. Open RStudio Software.
