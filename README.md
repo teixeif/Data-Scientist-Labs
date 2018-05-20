@@ -1,4 +1,4 @@
-# Data-Scientist-TOTVS-Labs
+# Data-Scientist-Labs
 Data Challenge
 
 <strong>Pre-requisites:</strong><br/>
